@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pernikahan Debritto &amp; Herlina</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&amp;family=Montserrat:wght@300;400;500;600;700&amp;family=Sacramento&amp;display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Custom Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FDFBF7',
+                        warmbeige: '#F4EFEB',
+                        burgundy: '#6B1D2F',
+                        deepburgundy: '#4A121F',
+                        gold: '#C5A059',
+                        softgold: '#E5C983',
+                        charcoal: '#2C2A29',
+                        terracotta: '#A6533A',
+                        softbrown: '#8C7A6B'
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                        script: ['Sacramento', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { background-color: #2C2A29; color: #2C2A29; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        .batik-pattern {
+            background-image: radial-gradient(#C5A059 0.6px, transparent 0.6px), radial-gradient(#C5A059 0.6px, #FDFBF7 0.6px);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            opacity: 0.12;
+        }
+        .cover-slide-up { transform: translateY(-100%); transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1); }
+        .glass-card { background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(197, 160, 89, 0.25); }
+        .dark-glass-card { background: rgba(44, 42, 41, 0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(197, 160, 89, 0.3); }
+        .reveal { opacity: 0; transform: translateY(35px); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(197, 160, 89, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+        }
+        .pulse-ring { animation: pulse-ring 2.5s infinite ease-in-out; }
+    </style>
+</head>
+<body class="relative min-h-screen text-gray-800 antialiased selection:bg-burgundy selection:text-white">
+
+    <!-- FLOATING MUSIC BUTTON -->
+    <div id="music-container" class="fixed bottom-6 right-6 z-50 hidden">
+        <button id="music-toggle" onclick="toggleAudio()" class="w-12 h-12 rounded-full bg-burgundy text-gold border border-gold/40 flex items-center justify-center shadow-2xl hover:bg-deepburgundy transition-all duration-300 focus:outline-none pulse-ring">
+            <i id="music-icon" class="fas fa-music text-base"></i>
+        </button>
+    </div>
+
+    <!-- OPENING COVER OVERLAY -->
+    <div id="opening-cover" class="fixed inset-0 z-50 flex items-center justify-center bg-deepburgundy px-4 text-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img id="cover-bg-img" src="https://lh3.googleusercontent.com/d/1nwVcj6ArVvLIKyeI5kOs6FR-Uyo1NBqt" alt="Background Cover Undangan" class="w-full h-full object-cover opacity-40 filter brightness-75 scale-105" referrerpolicy="no-referrer" onerror="handleDriveImgError(this, '1nwVcj6ArVvLIKyeI5kOs6FR-Uyo1NBqt')">
+            <div class="absolute inset-0 bg-gradient-to-t from-deepburgundy via-deepburgundy/70 to-deepburgundy/80"></div>
+        </div>
+
+        <div class="absolute inset-4 md:inset-8 border border-gold/40 rounded-2xl pointer-events-none z-10"></div>
+        <div class="absolute inset-5 md:inset-9 border border-gold/20 rounded-xl pointer-events-none z-10"></div>
+
+        <div class="max-w-md w-full py-12 px-6 flex flex-col items-center justify-center z-20 space-y-5 text-white">
+            <span class="text-xs uppercase tracking-[0.35em] text-gold font-semibold">The Wedding Invitation</span>
+
+            <div class="w-12 h-12 rounded-full border border-gold/40 flex items-center justify-center my-1 bg-burgundy/50 backdrop-blur-sm">
+                <span class="text-gold text-xl">💍</span>
+            </div>
+
+            <h1 class="font-serif text-5xl md:text-6xl text-cream font-normal tracking-wide leading-tight">
+                Debritto <br><span class="font-script text-4xl md:text-5xl text-gold font-normal my-1 block">&amp;</span> Herlina
+            </h1>
+
+            <div class="w-20 h-[1px] bg-gradient-to-r from-transparent via-gold to-transparent my-2"></div>
+
+            <p class="text-xs uppercase tracking-[0.25em] text-gold/90 font-medium">Sabtu, 21 November 2026</p>
+
+            <div class="pt-4 space-y-1">
+                <p class="text-xs text-gray-300 italic">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+                <div id="guest-name-display" class="font-serif text-lg text-cream font-semibold bg-burgundy/80 border border-gold/30 px-6 py-2 rounded-full shadow-lg inline-block">
+                    Tamu Undangan
+                </div>
+            </div>
+
+            <button onclick="openInvitation()" class="mt-6 px-8 py-3.5 bg-gradient-to-r from-gold to-softgold text-deepburgundy font-semibold text-xs uppercase tracking-widest rounded-full shadow-xl hover:brightness-110 hover:scale-105 transition-all duration-300 flex items-center space-x-2.5">
+                <i class="fas fa-envelope-open text-sm"></i>
+                <span>Buka Undangan</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main id="main-content" class="relative z-10 max-w-xl mx-auto bg-cream min-h-screen shadow-2xl overflow-hidden border-x border-gold/20">
+
+        <div class="fixed inset-0 batik-pattern pointer-events-none z-0"></div>
+
+        <!-- HERO SECTION -->
+        <section class="relative min-h-[92vh] flex flex-col items-center justify-between text-center px-6 py-12 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img src="https://lh3.googleusercontent.com/d/1nwVcj6ArVvLIKyeI5kOs6FR-Uyo1NBqt" alt="Background Hero Undangan" class="w-full h-full object-cover opacity-50 filter brightness-90" referrerpolicy="no-referrer" onerror="handleDriveImgError(this, '1nwVcj6ArVvLIKyeI5kOs6FR-Uyo1NBqt')">
+                <div class="absolute inset-0 bg-gradient-to-b from-warmbeige/80 via-cream/90 to-cream"></div>
+            </div>
+
+            <div class="pt-6 space-y-2 z-10">
+                <span class="text-[11px] uppercase tracking-[0.35em] text-terracotta font-semibold">The Wedding of</span>
+                <div class="text-gold text-2xl">💍</div>
+            </div>
+
+            <div class="relative z-10 w-full max-w-sm my-6">
+                <div class="relative rounded-t-full p-2 bg-gradient-to-b from-gold via-gold/40 to-transparent shadow-xl">
+                    <div class="overflow-hidden rounded-t-full aspect-[3/4] border-2 border-white shadow-inner relative">
+                        <img src="https://lh3.googleusercontent.com/d/1tpMccT0vTwC_Cj9R-oR9w4W3EXbCY3pt" alt="Debritto dan Herlina Prewedding" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700" referrerpolicy="no-referrer" onerror="handleDriveImgError(this, '1tpMccT0vTwC_Cj9R-oR9w4W3EXbCY3pt')">
+                        <div class="absolute inset-0 bg-gradient-to-t from-deepburgundy/80 via-transparent to-transparent"></div>
+
+                        <div class="absolute bottom-6 left-0 right-0 text-center text-white px-4">
+                            <h2 class="font-serif text-4xl text-cream tracking-wide">
+                                Debritto <span class="font-script text-3xl text-gold">&amp;</span> Herlina
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="z-10 max-w-md space-y-3 pb-4">
+                <p class="font-serif text-base text-burgundy italic leading-relaxed px-4">
+                    "Dua hati, satu janji, dan sebuah awal kehidupan yang baru."
+                </p>
+                <div class="inline-block border-y border-gold/60 py-2 px-8">
+                    <p class="text-xs uppercase tracking-[0.25em] text-charcoal font-semibold">Sabtu, 21 November 2026</p>
+                </div>
+            </div>
+
+            <div class="z-10 animate-bounce text-gold pt-2">
+                <i class="fas fa-chevron-down text-base"></i>
+            </div>
+        </section>
+
+        <!-- COUNTDOWN TIMER SECTION -->
+        <section class="py-12 px-6 text-center bg-deepburgundy text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-15 pointer-events-none">
+                <img src="https://lh3.googleusercontent.com/d/1kNQ8BrpCDhaD8PyEesRsm7wAjAY0_KPo" alt="Bunga Melati &amp; Dekorasi" class="w-full h-full object-cover" referrerpolicy="no-referrer" onerror="handleDriveImgError(this, '1kNQ8BrpCDhaD8PyEesRsm7wAjAY0_KPo')">
+            </div>
+
+            <div class="relative z-10 space-y-6">
+                <span class="text-xs uppercase tracking-[0.3em] text-gold font-medium">Menghitung Hari Bahagia</span>
+
+                <div class="grid grid-cols-4 gap-2.5 max-w-xs sm:max-w-sm mx-auto">
+                    <div class="dark-glass-card p-3 rounded-xl border border-gold/30">
+                        <span id="cd-days" class="font-serif text-2xl sm:text-3xl text-gold font-bold block">00</span>
+                        <span class="text-[9px] sm:text-[10px] uppercase tracking-wider text-gray-300">Hari</span>
+                    </div>
+                    <div class="dark-glass-card p-3 rounded-xl border border-gold/30">
+                        <span id="cd-hours" class="font-serif text-2xl sm:text-3xl text-gold font-bold block">00</span>
+                        <span class="text-[9px] sm:text-[10px] uppercase tracking-wider text-gray-300">Jam</span>
+                    </div>
+                    <div class="dark-glass-card p-3 rounded-xl border border-gold/30">
+                        <span id="cd-minutes" class="font-serif text-2xl sm:text-3xl text-gold font-bold block">00</span>
+                        <span class="text-[9px] sm:text-[10px] uppercase tracking-wider text-gray-300">Menit</span>
+                    </div>
+                    <div class="dark-glass-card p-3 rounded-xl border border-gold/30">
+                        <span id="cd-seconds" class="font-serif text-2xl sm:text-3xl text-gold font-bold block">00</span>
+                        <span class="text-[9px] sm:text-[10px] uppercase tracking-wider text-gray-300">Detik</span>
+                    </div>
+                </div>
+
+                <div>
+                    <a id="addToCalendarBtn" href="#" target="_blank" class="inline-flex items-center space-x-2 text-xs uppercase tracking-wider bg-gradient-to-r from-gold to-softgold text-deepburgundy font-semibold px-6 py-2.5 rounded-full shadow-lg hover:brightness-110 transition-all">
+                        <i class="far fa-calendar-plus"></i>
+                        <span>Simpan ke Kalender</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- BRIDE &amp; GROOM SECTION -->
+        <section class="py-16 px-6 text-center reveal">
+            <p class="text-xs text-gray-600 leading-relaxed max-w-sm mx-auto mb-10">
+                Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada hari bahagia pernikahan kami:
+            </p>
+
+            <div class="mb-12 max-w-md mx-auto">
+                <div class="p-2 bg-gradient-to-b from-gold/40 via-warmbeige to-gold/20 rounded-2xl shadow-xl">
+                    <div class="overflow-hidden rounded-xl border border-gold/30 aspect-[3/4] relative">
+                        <img src="https://lh3.googleusercontent.com/d/1jdarpCNE_gG_tjo1aqZv5iGpDmCmD7Il" alt="Debritto &amp; Herlina Fitur" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700" referrerpolicy="no-referrer" onerror="handleDriveImgError(this, '1jdarpCNE_gG_tjo1aqZv5iGpDmCmD7Il')">
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-10">
+                <div class="glass-card p-6 rounded-2xl border border-gold/30 shadow-sm max-w-md mx-auto">
+                    <span class="text-[10px] uppercase tracking-[0.25em] text-terracotta font-semibold">Mempelai Pria</span>
+                    <h3 class="font-serif text-3xl text-burgundy font-semibold tracking-wide my-1">Britto Crisnawan Sumantri</h3>
+                    <div class="w-8 h-[1px] bg-gold mx-auto my-3"></div>
+                    <p class="text-xs text-gray-500 mb-0.5">Putra dari Pasangan</p>
+                    <p class="text-xs font-semibold text-charcoal leading-relaxed">(Alm) Bpk. Heribertus Bambang Sumantri <br>&amp; Ibu FT Sumiyati</p>
+                </div>
+
+                <div class="font-script text-5xl text-gold font-normal my-2">&amp;</div>
+
+                <div class="glass-card p-6 rounded-2xl border border-gold/30 shadow-sm max-w-md mx-auto">
+                    <span class="text-[10px] uppercase tracking-[0.25em] text-terracotta font-semibold">Mempelai Wanita</span>
+                    <h3 class="font-serif text-3xl text-burgundy font-semibold tracking-wide my-1">Herlina Yuliastuti</h3>
+                    <div class="w-8 h-[1px] bg-gold mx-auto my-3"></div>
+                    <p class="text-xs text-gray-500 mb-0.5">Putri dari Pasangan</p>
+                    <p class="text-xs font-semibold text-charcoal leading-relaxed">(Alm) Bpk. Slamet Suhardi <br>&amp; Ibu Susiyati</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PREWEDDING PHOTO GALLERY -->
+        <section class="py-16 px-6 bg-warmbeige/50 border-t border-gold/20 reveal">
+            <div class="text-center mb-10">
+                <span class="text-xs uppercase tracking-[0.3em] text-terracotta font-semibold">Dokumentasi</span>
+                <h2 class="font-serif text-3xl text-burgundy mt-1">Galeri Prewedding</h2>
+                <div class="w-12 h-[1px] bg-gold mx-auto mt-2"></div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 max-w-md mx-auto">
+                <div class="col-span-2 overflow-hidden rounded-xl shadow-md border border-gold/30 cursor-pointer group" onclick="openLightbox('https://lh3.googleusercontent.com/d/1tpMccT0vTwC_Cj9R-oR9w4W3EXbCY3pt')">
+                    <img src="https://lh3.googleusercontent.com/d/1tpMccT0vTwC_Cj9R-oR9w4W3EXbCY3pt" alt="Prewedding Standing" class="w-full h-64 object-cover object-top group-hover:scale-105 transition-transform duration-500" referrerpolicy="no-referrer" onerror="handleDriveImgError(this, '1tpMccT0vTwC_Cj9R-oR9w4W3EXbCY3pt')">
+                </div>
+                <div class="overflow-hidden rounded-xl shadow-md border border-gold/30 cursor-pointer group" onclick="openLightbox('https://lh3.googleusercontent.com/d/1jdarpCNE_gG_tjo1aqZv5iGpDmCmD7Il')">
+                    <img src="https://lh3.googleusercontent.com/d/1jdarpCNE_gG_tjo1aqZv5iGpDmCmD7Il" alt="Prewedding Sitting" class="w-full h-48 object-cover object-top group-hover:scale-105 transition-transform duration-500" referrerpolicy="no-referrer" onerror="handleDriveImgError(this, '1jdarpCNE_gG_tjo1aqZv5iGpDmCmD7Il')">
+                </div>
+                <div class="overflow-hidden rounded-xl shadow-md border border-gold/30 cursor-pointer group" onclick="openLightbox('https://lh3.googleusercontent.com/d/1kKMSDNv7aTqwjbfrv7Lu0LUKTA3_E38G')">
+                    <img src="https://lh3.googleusercontent.com/d/1kKMSDNv7aTqwjbfrv7Lu0LUKTA3_E38G" alt="Prewedding Couple Close Up" class="w-full h-48 object-cover object-top group-hover:scale-105 transition-transform duration-500" referrerpolicy="no-referrer" onerror="handleDriveImgError(this, '1kKMSDNv7aTqwjbfrv7Lu0LUKTA3_E38G')">
+                </div>
+            </div>
+        </section>
+
+        <!-- EVENT DETAILS SECTION -->
+        <section class="py-16 px-6 bg-cream border-t border-gold/20 reveal">
+            <div class="text-center mb-10">
+                <span class="text-xs uppercase tracking-[0.3em] text-terracotta font-semibold">Rangkaian Acara</span>
+                <h2 class="font-serif text-3xl text-burgundy mt-1">Waktu &amp; Lokasi</h2>
+                <div class="w-12 h-[1px] bg-gold mx-auto mt-2"></div>
+            </div>
+
+            <div class="space-y-6 max-w-md mx-auto">
+                <div class="glass-card rounded-2xl p-6 text-center relative overflow-hidden shadow-sm border-t-4 border-t-burgundy">
+                    <div class="text-3xl mb-2">🪷</div>
+                    <h3 class="font-serif text-2xl text-burgundy font-bold tracking-wide">Sakramen Pernikahan</h3>
+
+                    <div class="my-3 text-xs text-gray-600 space-y-1">
+                        <p class="font-semibold text-charcoal text-sm">Sabtu, 21 November 2026</p>
+                        <p class="text-burgundy font-medium"><i class="far fa-clock mr-1 text-gold"></i> Pukul 09.00 WIB - Selesai</p>
+                    </div>
+
+                    <div class="my-4 text-xs text-gray-700 leading-relaxed border-t border-b border-gold/20 py-3">
+                        <p class="font-bold text-charcoal">Gereja St. Theresia Bongsari</p>
+                        <p class="text-gray-600 mt-0.5">Jl. Puspowarno No. 9, Semarang</p>
+                    </div>
+
+                    <a href="https://maps.google.com/?q=Gereja+St.+Theresia+Bongsari+Semarang" target="_blank" class="inline-flex items-center space-x-2 text-xs bg-burgundy text-gold font-medium px-5 py-2.5 rounded-full shadow hover:bg-deepburgundy transition-all">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Buka Google Maps</span>
+                    </a>
+                </div>
+
+                <div class="glass-card rounded-2xl p-6 text-center relative overflow-hidden shadow-sm border-t-4 border-t-gold">
+                    <div class="text-3xl mb-2">🌿</div>
+                    <h3 class="font-serif text-2xl text-burgundy font-bold tracking-wide">Resepsi Pernikahan</h3>
+
+                    <div class="my-3 text-xs text-gray-600 space-y-1">
+                        <p class="font-semibold text-charcoal text-sm">Sabtu, 21 November 2026</p>
+                        <p class="text-burgundy font-medium"><i class="far fa-clock mr-1 text-gold"></i> Pukul 12.00 WIB - Selesai</p>
+                    </div>
+
+                    <div class="my-4 text-xs text-gray-700 leading-relaxed border-t border-b border-gold/20 py-3">
+                        <p class="font-bold text-charcoal">Kediaman Mempelai Wanita</p>
+                        <p class="text-gray-600 mt-0.5">Jl. Jatirejo RT 01 RW 01, Kel. Jatirejo, Gunungpati, Semarang</p>
+                    </div>
+
+                    <a href="https://www.google.com/maps?q=-7.059639,110.348417" target="_blank" class="inline-flex items-center space-x-2 text-xs bg-burgundy text-gold font-medium px-5 py-2.5 rounded-full shadow hover:bg-deepburgundy transition-all">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Buka Google Maps</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- GUESTBOOK / UCAPAN &amp; DOA -->
+        <section class="py-16 px-6 bg-cream border-t border-gold/20 reveal">
+            <div class="text-center mb-8">
+                <span class="text-xs uppercase tracking-[0.3em] text-terracotta font-semibold">Buku Tamu</span>
+                <h2 class="font-serif text-3xl text-burgundy mt-1">Ucapan &amp; Doa Restu</h2>
+                <div class="w-12 h-[1px] bg-gold mx-auto mt-2"></div>
+            </div>
+
+            <form id="guestbook-form" onsubmit="submitWish(event)" class="glass-card p-6 rounded-2xl space-y-4 max-w-md mx-auto shadow-sm border border-gold/30">
+                <div>
+                    <label class="block text-xs font-semibold text-charcoal mb-1">Nama Anda</label>
+                    <input type="text" id="guest-name" required placeholder="Masukkan nama Anda" class="w-full text-xs p-3 rounded-lg border border-gold/30 focus:outline-none focus:border-burgundy bg-white/90">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-charcoal mb-1">Konfirmasi Kehadiran</label>
+                    <select id="guest-status" class="w-full text-xs p-3 rounded-lg border border-gold/30 focus:outline-none focus:border-burgundy bg-white/90">
+                        <option value="Hadir">Ya, Saya Akan Hadir</option>
+                        <option value="Tidak Hadir">Maaf, Saya Tidak Bisa Hadir</option>
+                        <option value="Ragu-ragu">Masih Ragu-ragu</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-charcoal mb-1">Ucapan &amp; Doa Restu</label>
+                    <textarea id="guest-message" rows="3" required placeholder="Tuliskan ucapan dan doa Anda..." class="w-full text-xs p-3 rounded-lg border border-gold/30 focus:outline-none focus:border-burgundy bg-white/90"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-gold to-softgold text-deepburgundy text-xs uppercase tracking-wider font-bold rounded-lg shadow hover:brightness-105 transition-all">
+                    Kirim Ucapan
+                </button>
+            </form>
+
+            <div class="mt-8 max-w-md mx-auto">
+                <h4 class="text-xs uppercase tracking-wider text-terracotta font-semibold mb-3 px-1">
+                    Ucapan Terbaru (<span id="wish-count">2</span>)
+                </h4>
+                <div id="wishes-container" class="space-y-3 max-h-80 overflow-y-auto pr-1">
+                    <div class="glass-card p-4 rounded-xl border-l-4 border-burgundy text-left">
+                        <div class="flex justify-
